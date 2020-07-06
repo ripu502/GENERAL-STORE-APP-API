@@ -2,6 +2,7 @@ const Vender = require('../models/Vender');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
+const Item = require('../models/Item');
 
 module.exports.register = async (req, res, next) => {
     const { mobile, password } = req.body;
@@ -95,6 +96,32 @@ module.exports.login = (req, res, next) => {
 }
 
 
-module.exports.list = (req, res, next) => {
-
+module.exports.postList = (req, res, next) => {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            const venderId = authData.id
+            const { title, description, price } = req.body;
+            const item = new Item({ venderId, title, description, price });
+            item.save()
+                .then(result => {
+                    res.status(200).json(
+                        {
+                            status: '1',
+                            msg: 'Item is Saved'
+                        }
+                    )
+                })
+                .catch(err => {
+                    res.status(403).json(
+                        {
+                            status: '2',
+                            msg: 'Some issue occured in saving the item',
+                            err: err
+                        }
+                    )
+                })
+        }
+    })
 }
