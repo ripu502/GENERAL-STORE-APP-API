@@ -1,0 +1,24 @@
+{
+  "name": "general-store-app-api",
+  "version": "1.0.0",
+  "description": "Authentication and Registration API for customer and shopkeeper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ripu502/GENERAL-STORE-APP-API.git"
+  },
+  "author": "Ripudaman SIngh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ripu502/GENERAL-STORE-APP-API/issues"
+  },
+  "homepage": "https://github.com/ripu502/GENERAL-STORE-APP-API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.21",
+    "nodemon": "^2.0.4"
+  }
+}
