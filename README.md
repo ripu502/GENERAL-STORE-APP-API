@@ -19,7 +19,7 @@ or *make file nodemon.json*
     "MongoDatabase": ""
     }
     }
-*full the credential and save file*
+*full the credential and save file also make changes to connection uri according to database*
 
 ## run
 
