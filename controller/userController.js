@@ -5,6 +5,13 @@ const { validationResult } = require('express-validator');
 const Item = require('../models/Item');
 
 module.exports.register = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            status: '2',
+            errors: errors.array(),
+        });
+    }
     const { email, password } = req.body;
     let hashPassword = await bcrypt.hash(password, 12);
     const user = new User(
@@ -33,6 +40,13 @@ module.exports.register = async (req, res, next) => {
 }
 
 module.exports.login = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            status: '2',
+            errors: errors.array(),
+        });
+    }
     const { email, password } = req.body;
     User.findOne({ email: email })
         .then(user => {
