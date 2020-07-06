@@ -7,6 +7,7 @@ const cors = require('cors');
 const app = express();
 
 const router = require('./router/router');
+const { post } = require('./router/router');
 
 const port = process.env.PORT || 3000;
 app.use(helmet());
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use(router);
 
-mongoose.connect('some mongo uri',
+mongoose.connect(`mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}@cluster0-jywn3.mongodb.net/${process.env.MongoDatabase}?retryWrites=true`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -33,7 +34,7 @@ mongoose.connect('some mongo uri',
     .then(res => {
         console.log('connected');
         app.listen(port, () => {
-            console.log(`server is running at http://localhost:port`);
+            console.log(`server is running at http://localhost:${port}`);
         })
     })
     .catch(err => {
